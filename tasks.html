@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <label for="name">Nombre</label>
+    <input required type="text" id="name" ><br><br>
+    <label for="age">Edad</label>
+    <input required type="number" id="age" ><br><br>
+    <label for="weight">Peso</label>
+    <input required type="number" id="weight" ><br><br>
+    <button onclick="addPerson();">Enviar</button>
+
+    <br><br><br>
+
+    <label for="options">Ver info sobre:</label>
+    <select onchange="displayPerson();" id="options">
+        
+    </select>
+    <br><br>
+
+    <table id="table-container-display">
+        <thead>
+            <th>Index</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Peso</th>
+        </thead>
+        <tr id="table-container__tr">
+            <td id="table-container-display__tr-ht--index"></td>
+            <td id="table-container-display__tr-ht--name"></td>
+            <td id="table-container-display__tr-ht--age"></td>
+            <td id="table-container-display__tr-ht--weight"></td>
+        </tr>
+    </table>
+    <br><br>
+
+    <button onclick="showList();">Ver lista completa</button>
+    <br>
+
+    <div id="list" style="display:none">
+        <table id="table-container-list">
+            <thead>
+                <th>Index</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Peso</th>
+            </thead>
+        </table>
+        <br><br>
+        <button onclick="hideList();">Cerrar lista completa</button>
+    </div>
+
+
+  <script src="tasks.js"></script>  
+</body>
+</html>
