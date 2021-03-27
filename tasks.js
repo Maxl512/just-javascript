@@ -54,6 +54,7 @@ const addPerson = () =>{
     let tda = document.createElement("TD");
     let tdw = document.createElement("TD");
     let tbtn = document.createElement("TD");
+    let tbtnT = document.createElement("TD");;
     let btn = document.createElement("BUTTON");
     let btnTwo = document.createElement("BUTTON");
      
@@ -113,13 +114,18 @@ const createOptions = () =>{
     parseInt(quantityOfPeople);
     let i =  quantityOfPeople - 1;
     while (i < quantityOfPeople) {
+        let index = people[i][0];
         let name = people[i][1];
+        let age = people[i][2];
+        let weight = people[i][3];
         let select = document.querySelector("#options");
         let option = document.createElement("OPTION");
         let optionText = document.createTextNode(name);
         option.appendChild(optionText);
         option.setAttribute("value", i);
+        option.setAttribute("id", `${"option"+(i+1)}`);
         select.appendChild(option);
+
         i++;
     };
     displayPerson();
@@ -178,12 +184,41 @@ function saveValues(index) {
     age.setAttribute("contentEditable", "false");
     weight.setAttribute("contentEditable", "false");
 };
-function deleteValues(index) {
+function deletePerson(index) {
     let btn = document.querySelector(`#${"deleteButton" + index}`);
     btn.style.display = "block";
 
     let tBtn = btn.parentNode;
     let rTBtn = tBtn.parentNode;
-    rTBtn.removeChild(tBtn);
- 
+    let tRTBtn = rTBtn.parentNode;
+    tRTBtn.removeChild(rTBtn);
+    people.splice(index - 1);
+   
+    let ind = "";
+    let name = "";
+    let age = "";
+    let weight = "";
+
+    document.querySelector("#table-container-display__tr-ht--index").innerHTML = ind;
+    document.querySelector("#table-container-display__tr-ht--name").innerHTML = name;
+    document.querySelector("#table-container-display__tr-ht--age").innerHTML = age;
+    document.querySelector("#table-container-display__tr-ht--weight").innerHTML = weight;
+   
+    let select = document.querySelector("#options");
+    let option = document.querySelector(`#${"option" + index}`);
+    select.removeChild(option);
+
+    refreshOptions();
+};
+
+refreshOptions =() =>{
+    let quantityOfPeople = people.length;
+    parseInt(quantityOfPeople);
+    let i =  quantityOfPeople;
+    while (i < quantityOfPeople) {
+        let option = document.querySelector(`#${"option" + i}`);
+        option.setAttribute("value", i);
+        option.setAttribute("id", `${"option"+(i)}`);
+        i++;
+    };
 };
