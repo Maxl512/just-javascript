@@ -19,7 +19,7 @@
     <br><br><br>
 
     <label for="options">Ver info sobre:</label>
-    <select onchange="displayPerson();" id="options">
+    <select onchange="displayPerson(`${this.value}`);" id="options">
         
     </select>
     <br><br>
@@ -32,10 +32,10 @@
             <th>Peso</th>
         </thead>
         <tr id="table-container__tr">
-            <td id="table-container-display__tr-ht--index"></td>
-            <td id="table-container-display__tr-ht--name"></td>
-            <td id="table-container-display__tr-ht--age"></td>
-            <td id="table-container-display__tr-ht--weight"></td>
+            <td id="table-container-display__tr-td--index"></td>
+            <td id="table-container-display__tr-td--name"></td>
+            <td id="table-container-display__tr-td--age"></td>
+            <td id="table-container-display__tr-td--weight"></td>
         </tr>
     </table>
     <br><br>

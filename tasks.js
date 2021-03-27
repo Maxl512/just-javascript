@@ -38,75 +38,150 @@ addName();*/
 // Simple funcion para agregar nobmres
 let people = [];
 const addPerson = () =>{
-    let index = people.length + 1;
-    let name = document.querySelector("#name").value;
-    let age = document.querySelector("#age").value;
-    let weight = document.querySelector("#weight").value;
-    let person = [index, name, age, weight + "kg"];  
-    people.push(person);
-    localStorage.setItem("Personas", people);
+    if (people.length == 0) {
+        let index = people.length + 1;
+        let name = document.querySelector("#name").value;
+        let age = document.querySelector("#age").value;
+        let weight = document.querySelector("#weight").value;
+        let person = [index, name, age, weight + "kg"];  
+        people.push(person);
+        localStorage.setItem("Personas", people);
+        
+        let list = document.querySelector("#table-container-list");
+        let row = document.createElement("TR");
+        
+        let tdi = document.createElement("TD");
+        let tdn = document.createElement("TD");
+        let tda = document.createElement("TD");
+        let tdw = document.createElement("TD");
+        let tbtn = document.createElement("TD");
+        let tbtnT = document.createElement("TD");;
+        let btn = document.createElement("BUTTON");
+        let btnTwo = document.createElement("BUTTON");
+         
+        name = document.createTextNode(name);
+        age = document.createTextNode(age);
+        weight = document.createTextNode(weight + "kg");
+        
+        let btnText = document.createTextNode("Editar");
+        btn.appendChild(btnText);
+        index.toString();
+        btn.setAttribute("onclick", `changeValues(${index});`);
+        btn.setAttribute("id", `${"button" + index}`);
     
-    let list = document.querySelector("#table-container-list");
-    let row = document.createElement("TR");
+        let btnTwoText = document.createTextNode("Delete");
+        btnTwo.appendChild(btnTwoText);
+        btnTwo.setAttribute("onclick", `deletePerson(${index});`);
+        btnTwo.setAttribute("id", `${"deleteButton" + index}`);
     
-    let tdi = document.createElement("TD");
-    let tdn = document.createElement("TD");
-    let tda = document.createElement("TD");
-    let tdw = document.createElement("TD");
-    let tbtn = document.createElement("TD");
-    let tbtnT = document.createElement("TD");;
-    let btn = document.createElement("BUTTON");
-    let btnTwo = document.createElement("BUTTON");
-     
-    name = document.createTextNode(name);
-    age = document.createTextNode(age);
-    weight = document.createTextNode(weight + "kg");
+        row.setAttribute("id", `${"row" +  index}`);
     
-    let btnText = document.createTextNode("Editar");
-    btn.appendChild(btnText);
-    index.toString();
-    btn.setAttribute("onclick", `changeValues(${index});`);
-    btn.setAttribute("id", `${"button" + index}`);
-
-    let btnTwoText = document.createTextNode("Delete");
-    btnTwo.appendChild(btnTwoText);
-    btnTwo.setAttribute("onclick", `deletePerson(${index});`);
-    btnTwo.setAttribute("id", `${"deleteButton" + index}`);
-
-    index = document.createTextNode(people.length);
-
-
-    tdi.appendChild(index);
-    tdn.appendChild(name);
-    tda.appendChild(age);
-    tdw.appendChild(weight);
-    tbtn.appendChild(btn);
-    tbtnT.appendChild(btnTwo);
+        let i = people.length - 1;
+        i++;
+        index = document.createTextNode(i);
     
-    row.appendChild(tdi);
-    row.appendChild(tdn);
-    row.appendChild(tda);
-    row.appendChild(tdw);
-    row.appendChild(tbtn);
-    row.appendChild(tbtnT);
+    
+        tdi.appendChild(index);
+        tdn.appendChild(name);
+        tda.appendChild(age);
+        tdw.appendChild(weight);
+        tbtn.appendChild(btn);
+        tbtnT.appendChild(btnTwo);
+        
+        row.appendChild(tdi);
+        row.appendChild(tdn);
+        row.appendChild(tda);
+        row.appendChild(tdw);
+        row.appendChild(tbtn);
+        row.appendChild(tbtnT);
+    
+        list.appendChild(row);
+    
+    
+        createOptions();
+    } else if(people.length > 0){
 
-    list.appendChild(row);
+        let previousRow = document.querySelector(`#${"row" + people.length}`);
+        let previousRowTd = previousRow.firstElementChild;
+        let index = previousRowTd.textContent;
+        parseInt(index);
+        index++;
+        
+        let name = document.querySelector("#name").value;
+        let age = document.querySelector("#age").value;
+        let weight = document.querySelector("#weight").value;
+        let person = [index, name, age, weight + "kg"];  
+        people.push(person);
+        localStorage.setItem("Personas", people);
+        
+        let list = document.querySelector("#table-container-list");
+        let row = document.createElement("TR");
+        
+        let tdi = document.createElement("TD");
+        let tdn = document.createElement("TD");
+        let tda = document.createElement("TD");
+        let tdw = document.createElement("TD");
+        let tbtn = document.createElement("TD");
+        let tbtnT = document.createElement("TD");;
+        let btn = document.createElement("BUTTON");
+        let btnTwo = document.createElement("BUTTON");
+         
+        name = document.createTextNode(name);
+        age = document.createTextNode(age);
+        weight = document.createTextNode(weight + "kg");
+        
+        let btnText = document.createTextNode("Editar");
+        btn.appendChild(btnText);
 
+        btn.setAttribute("onclick", `changeValues(${index});`);
+        btn.setAttribute("id", `${"button" + index}`);
+    
+        let btnTwoText = document.createTextNode("Delete");
+        btnTwo.appendChild(btnTwoText);
+        btnTwo.setAttribute("onclick", `deletePerson(${index});`);
+        btnTwo.setAttribute("id", `${"deleteButton" + index}`);
+    
+        row.setAttribute("id", `${"row" +  index}`);
+    
+        
+        index = document.createTextNode(index);
+    
+    
+        tdi.appendChild(index);
+        tdn.appendChild(name);
+        tda.appendChild(age);
+        tdw.appendChild(weight);
+        tbtn.appendChild(btn);
+        tbtnT.appendChild(btnTwo);
+        
+        row.appendChild(tdi);
+        row.appendChild(tdn);
+        row.appendChild(tda);
+        row.appendChild(tdw);
+        row.appendChild(tbtn);
+        row.appendChild(tbtnT);
+    
+        list.appendChild(row);
+    
+    
+        createOptions();
 
-    createOptions();
+    }
 };
-const displayPerson =()=>{
-    let option = document.querySelector("#options").value;
-    
-    let index = people[option][0]
-    let name = people[option][1];
-    let age = people[option][2];
-    let weight = people[option][3];
+const displayPerson =(i)=>{
 
-    document.querySelector("#table-container-display__tr-ht--index").innerHTML = index;
-    document.querySelector("#table-container-display__tr-ht--name").innerHTML = name;
-    document.querySelector("#table-container-display__tr-ht--age").innerHTML = age;
-    document.querySelector("#table-container-display__tr-ht--weight").innerHTML = weight;
+
+    let row = document.querySelector(`#${"row" + i}`);
+
+    let index = row.firstChild;
+    let name = index.nextSibling;
+    let age = name.nextSibling;
+    let weight = age.nextSibling;
+
+    document.querySelector("#table-container-display__tr-td--index").innerHTML = index.textContent;
+    document.querySelector("#table-container-display__tr-td--name").innerHTML = name.textContent;
+    document.querySelector("#table-container-display__tr-td--age").innerHTML = age.textContent;
+    document.querySelector("#table-container-display__tr-td--weight").innerHTML = weight.textContent;
 
 };
 const createOptions = () =>{
@@ -114,21 +189,18 @@ const createOptions = () =>{
     parseInt(quantityOfPeople);
     let i =  quantityOfPeople - 1;
     while (i < quantityOfPeople) {
-        let index = people[i][0];
         let name = people[i][1];
-        let age = people[i][2];
-        let weight = people[i][3];
         let select = document.querySelector("#options");
         let option = document.createElement("OPTION");
         let optionText = document.createTextNode(name);
         option.appendChild(optionText);
-        option.setAttribute("value", i);
-        option.setAttribute("id", `${"option"+(i+1)}`);
+        option.setAttribute("value", i + 1);
+        option.setAttribute("id", `${"option"+(quantityOfPeople)}`);
         select.appendChild(option);
 
         i++;
     };
-    displayPerson();
+    displayPerson(i);
 };
 const showList = () => {
     let list = document.querySelector("#list");
@@ -142,15 +214,15 @@ function changeValues(index){
     let btn = document.querySelector(`#${"button" + index}`);
     btn.style.display = "none";
 
-    let tBtn = btn.parentNode;
-    let rTBtn = tBtn.parentNode;
+    let td = btn.parentNode;
 
-    let ind = rTBtn.firstChild;
+    let row = document.querySelector(`#${"row" + index}`);
+
+    let ind = row.firstChild;
     let name = ind.nextSibling;
     let age = name.nextSibling;
     let weight = age.nextSibling;
 
-    ind.setAttribute("contentEditable", "true");
     name.setAttribute("contentEditable", "true");
     age.setAttribute("contentEditable", "true");
     weight.setAttribute("contentEditable", "true");
@@ -161,64 +233,51 @@ function changeValues(index){
     newBtn.appendChild(newBtnText);
     newBtn.setAttribute("id" , `${"newButton" + index}`)
     newBtn.setAttribute("onclick", `saveValues(${index});`);
-    tBtn.appendChild(newBtn);
+    td.appendChild(newBtn);
 
 };
 function saveValues(index) {
     let newBtn = document.querySelector(`#${"newButton" + index}`);
     let btn = document.querySelector(`#${"button" + index}`);
     btn.style.display = "block";
+    
+    let td = newBtn.parentNode;
+    td.removeChild(newBtn);
 
-    let tBtn = btn.parentNode;
-    let rTBtn = tBtn.parentNode;
+    let row = document.querySelector(`#${"row" + index}`);
 
-    tBtn.removeChild(newBtn);
-
-    let ind = rTBtn.firstChild;
+    let ind = row.firstChild;
     let name = ind.nextSibling;
     let age = name.nextSibling;
     let weight = age.nextSibling;
 
-    ind.setAttribute("contentEditable", "false");
     name.setAttribute("contentEditable", "false");
     age.setAttribute("contentEditable", "false");
     weight.setAttribute("contentEditable", "false");
+
+    let nameV = name.textContent;
+    let ageV = age.textContent;
+    let weightV = weight.textContent;
+
+    people[index - 1].splice(1, 3, nameV, ageV, weightV);
+
+    document.querySelector(`#${"option" + index}`).innerHTML = nameV;
+
+    displayPerson(index);
+
 };
 function deletePerson(index) {
     let btn = document.querySelector(`#${"deleteButton" + index}`);
     btn.style.display = "block";
 
-    let tBtn = btn.parentNode;
-    let rTBtn = tBtn.parentNode;
-    let tRTBtn = rTBtn.parentNode;
-    tRTBtn.removeChild(rTBtn);
-    people.splice(index - 1);
-   
-    let ind = "";
-    let name = "";
-    let age = "";
-    let weight = "";
+    let row = document.querySelector(`#${"row" + index}`);
 
-    document.querySelector("#table-container-display__tr-ht--index").innerHTML = ind;
-    document.querySelector("#table-container-display__tr-ht--name").innerHTML = name;
-    document.querySelector("#table-container-display__tr-ht--age").innerHTML = age;
-    document.querySelector("#table-container-display__tr-ht--weight").innerHTML = weight;
+    let table = row.parentNode;
+    table.removeChild(row);
+
+    people.splice(index - 1);
    
     let select = document.querySelector("#options");
     let option = document.querySelector(`#${"option" + index}`);
     select.removeChild(option);
-
-    refreshOptions();
-};
-
-refreshOptions =() =>{
-    let quantityOfPeople = people.length;
-    parseInt(quantityOfPeople);
-    let i =  quantityOfPeople;
-    while (i < quantityOfPeople) {
-        let option = document.querySelector(`#${"option" + i}`);
-        option.setAttribute("value", i);
-        option.setAttribute("id", `${"option"+(i)}`);
-        i++;
-    };
 };
