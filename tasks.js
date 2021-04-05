@@ -34,7 +34,7 @@
         };
     };
 };
-addName();*/
+addName();
 // Simple funcion para agregar nobmres
 let people = [];
 const addPerson = () =>{
@@ -169,8 +169,6 @@ const addPerson = () =>{
     }
 };
 const displayPerson =(i)=>{
-
-
     let row = document.querySelector(`#${"row" + i}`);
 
     let index = row.firstChild;
@@ -280,4 +278,35 @@ function deletePerson(index) {
     let select = document.querySelector("#options");
     let option = document.querySelector(`#${"option" + index}`);
     select.removeChild(option);
+};
+
+*/
+let gun = document.querySelector("#gun");
+let ammo = document.querySelector("#ammo");
+const shot = () =>{
+    ammo.style.width = "150%";
+    ammo.style.height = "100%";
+    ammo.style.left ="730%";
+    ammo.style.visibility ="hidden";
+    ammo.style.transition ="width .2s linear, height .2s linear, left .4s ease-out, visibility .7s linear";
+};
+const reload =() =>{
+    ammo.style.transition ="none";
+    ammo.style.width = "50%";
+    ammo.style.height = "50%";
+    ammo.style.left ="0%";
+    ammo.style.visibility ="visible";
+    
+};
+function moveGun(event, position){
+    let dir = event.which || event.keyCode;
+    
+    if(dir === 40){
+        position += 15; 
+        gun.style.top = `${position}%`;
+    } else if (dir === 38){
+        position -= 15;
+        gun.style.top = `${position}%`;
+    };
+
 };

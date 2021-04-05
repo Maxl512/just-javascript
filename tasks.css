@@ -1,0 +1,170 @@
+body{
+    background-color: #555;
+}
+.animation-container{
+    position: relative;
+    width: 500px;
+    height: 400px;
+    background-color: #002;
+    padding: 20px;
+}
+.animation-container__div--one{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #700;
+    border-radius: 5px;
+    animation-name: movingOne;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+.animation-container__div--two{
+    position: absolute;
+    width: 10px;
+    height: 10px;  
+    bottom: 20px;
+    right: 20px;
+    background-color: #007; 
+    border-radius: 5px;
+    
+    animation-name: movingTwo;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+}
+.animation-container__div--three{
+    position: absolute;
+
+    top: 30%;
+    left: 30%;
+    
+    width: 200px;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 50%;
+    
+    transition: top .5s linear;
+    transform: translate(50px, 0px);
+}
+.animation-container__div--four{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 150px;
+    height: 100px;
+    background-color: #000;
+    border-radius: 50%;
+
+    transform: translate(50px, 0px);
+}
+
+.animation-container__div--five{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 75px;
+    height: 50px;
+    background-color: #aaa;
+    border-radius: 50%;
+
+    transform: translate(50px, 0px);
+    transition: width .2s linear, height .2s linear, left .4s ease-out, visibility .7s linear;
+}
+.gun-button{
+    display: inline-block;
+    width: 268px;
+    height: 40px;
+    background-color: #fff;
+    border: none;
+}
+@keyframes movingOne{
+    0%{
+        width: 500px;      
+    }
+    15%{    
+        transform: translateX(500px);
+        width: 10px;
+        height: 10px;
+    }
+    30%{
+        width: 10px;
+        height: 400px;
+        transform: translateX(500px);
+    }
+    45%{
+        width: 10px;
+        height: 10px;
+        transform: translate(500px, 400px);
+    }
+    60%{
+        width: 500px;
+        height: 10px;
+        transform: translate(0px, 400px);
+        background-color: #007;
+    }
+    75%{
+        width: 10px;
+        height: 10px;
+        transform: translate(0px, 400px);
+
+    }
+    90%{
+        width: 10px;
+        height: 400px;
+        transform: translate(0px, 0px);
+    }
+    100%{
+        width: 10px;
+        height: 10px;
+    }
+}
+@keyframes movingTwo{
+    0%{
+        width: 500px;
+        height: 10px;   
+    }
+    15%{
+        width: 10px;
+        height: 10px;
+        transform: translate(-500px, 0px);
+    }
+    30%{
+        width: 10px;
+        height: 400px;
+        transform: translate(-500px, 0px);
+    }
+    45%{
+        width: 10px;
+        height: 10px;
+        transform: translate(-500px, -400px);
+    }
+    60%{
+        width: 500px;
+        height: 10px;
+        transform: translate(0px, -400px);
+        background-color: #700;
+    }
+    75%{
+        width: 10px;
+        height: 10px;
+        transform: translate(0px, -400px);
+    }
+    90%{
+        width: 10px;
+        height: 400px;
+        transform: translate(0px, -0px);        
+    }
+    100%{
+        width: 10px;
+        height: 10px;
+    }
+}

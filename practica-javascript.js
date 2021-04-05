@@ -76,8 +76,6 @@ let estado = prompt("Habla perro, ¿todo bien?");
 
 console.log(estado);
 
-
-
 // OPERADORES 
 // OPERADORES DE ASIGNACION
 // Un operador de asignacion asigna un valor al operando de
@@ -1392,11 +1390,6 @@ const mostrarInformacion = (userName) => {
             };
         };
     };
-    for (inscritos in grupo){
-        if (grupo[inscritos].includes(userName)) {
-            clasesActivas++;
-        };
-    };
 
 };
 function preguntarName() {
@@ -1427,9 +1420,6 @@ function preguntarName() {
     };
 };
 preguntarName();
-
-
-
 
 KOFLA ESTA DECIDIDO A INSCRIBIRSE, PERO SE ROMPIO EL SISTEMA DE INSCRIPCION
 
@@ -1667,21 +1657,21 @@ let horas = {
 };
 
 for (hora in horas) { 
-    let tarea = horas[hora][1];
     let tiempo = Math.round(horas[hora][0]);
+    let tarea = horas[hora][1];
     if (tiempo > 4) {
         console.groupCollapsed(`%c${hora}`, `font-size:20px;color:blue`); 
         console.group(`%cSemana 1`, `font-size:15px;color:black;`);
         for ( i=0; i < 7; i++){  
             console.groupCollapsed("Dia " + i);          
-            console.log(`%Tendrias que ${tarea} aproximadamente: ${tiempo} horas, eso es mas de 4 horas y no es posible hacerlo`, `color:red; padding:10px;background:lightblue;border: 3px solid black;`);            
+            console.log(`%cTendrias que ${tarea} aproximadamente: ${tiempo} horas, eso es mas de 4 horas y no es posible hacerlo`, `color:red; padding:10px;background:lightblue;border: 3px solid black;`);            
             console.groupEnd();
         };
         console.groupEnd();
         console.groupCollapsed(`%cSemana2`, `font-size:15px;color:black;`);
         for ( i=7; i < 14; i++){
             console.groupCollapsed("Dia " + i);
-            console.log(`%Tendrias que ${tarea} aproximadamente: ${tiempo} horas, eso es mas de 4 horas y no es posible hacerlo`, `color:red; padding:10px;background:lightblue;border: 3px solid black;`);            
+            console.log(`%cTendrias que ${tarea} aproximadamente: ${tiempo} horas, eso es mas de 4 horas y no es posible hacerlo`, `color:red; padding:10px;background:lightblue;border: 3px solid black;`);            
             console.groupEnd();
         };
         console.groupEnd();
@@ -2124,7 +2114,7 @@ const createKey = () =>{
 
     const setRandomKeys = () =>{
         let clases = document.querySelectorAll(".row");
-        let quantity= clases.length;
+        let quantity = clases.length;
         for (i = quantity; i < 20; i++) {
             let keyName = document.createTextNode("Item" + (i + 1));
 

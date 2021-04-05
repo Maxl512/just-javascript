@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="tasks.css">
+    <title>Tasks Javascript</title>
 
 </head>
-<body>
+<body onkeydown="moveGun(event, 30);">
+<!--
     <label for="name">Nombre</label>
     <input required type="text" id="name" ><br><br>
     <label for="age">Edad</label>
     <input required type="number" id="age" ><br><br>
     <label for="weight">Peso</label>
     <input required type="number" id="weight" ><br><br>
-    <button onclick="addPerson();">Enviar</button>
+    <button id="addBtn" onclick="addPerson();">Enviar</button>
+    <button style="display:none;" id="addBtn2" onclick="addPerson2();">Enviar</button>
 
     <br><br><br>
-
+   
     <label for="options">Ver info sobre:</label>
     <select onchange="displayPerson(`${this.value}`);" id="options">
         
@@ -54,7 +57,26 @@
         </table>
         <br><br>
         <button onclick="hideList();">Cerrar lista completa</button>
+    </div>-->
+
+    <div class="animation-container">
+        <div class="animation-container__div--one"></div>
+        <div class="animation-container__div--two"></div>
+        <div id="gun" class="animation-container__div--three">     
+            <div class="animation-container__div--four">
+                <div id="ammo" class="animation-container__div--five"></div>
+            </div>
+        </div>
     </div>
+
+    <button onclick="shot();" class="gun-button">Disparar</button>
+    <button onclick="reload();" class="gun-button">Recargar</button>
+
+
+
+
+
+    
 
 
   <script src="tasks.js"></script>  
