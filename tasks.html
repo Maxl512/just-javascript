@@ -58,19 +58,36 @@
         <br><br>
         <button onclick="hideList();">Cerrar lista completa</button>
     </div>-->
-
-    <div class="animation-container">
-        <div class="animation-container__div--one"></div>
-        <div class="animation-container__div--two"></div>
-        <div id="gun" class="animation-container__div--three">     
-            <div class="animation-container__div--four">
-                <div id="ammo" class="animation-container__div--five"></div>
+    <!-- <h1 class="game-title">Mata al OGRO!</h1> -->
+    <div class="game-container">
+        <div class="gun-container">
+            <div class="gun-container__div--one"></div>
+            <div class="gun-container__div--two"></div>
+            <div id="gun" class="gun-container__div--three">     
+                <div class="gun-container__div--four">
+                    <div id="ammo" class="gun-container__div--five"></div>
+                </div>
             </div>
         </div>
+        <div class="monsters-container">
+            <div id="monster" class="monsters-container__div">
+                <span id="eye-L" class="monsters-container__div-span"></span>
+                <span id="eye-R" class="monsters-container__div-span"></span>
+                <span id="mouth" class="monsters-container__div-span"></span>
+            </div>    
+        </div>
+        <div class="buttons-container">
+            <button id="shotOne" onclick="shot(1);" class="buttons-container__button">Disparar</button>
+            <button id="shotTwo" style="display: none;" onclick="shot(2);" class="buttons-container__button">Disparar</button>
+            <button id="shotThree" style="display: none;" onclick="shot(3);" class="buttons-container__button">Disparar</button>
+            <button onclick="reload();" class="buttons-container__button">Recargar</button>
+        </div>
+        <div class="score-container">
+            <p class="score-container__p">Kills: <span id="kills" class="score-container__p-span">0</span></p>
+            <p class="score-container__p">Score: <span id="score" class="score-container__p-span">0</span></p>
+            <p class="score-container__p">Lives: <span id="lives" class="score-container__p-span">3</span></p>
+        </div>
     </div>
-
-    <button onclick="shot();" class="gun-button">Disparar</button>
-    <button onclick="reload();" class="gun-button">Recargar</button>
 
 
 
