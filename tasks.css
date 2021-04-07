@@ -84,6 +84,7 @@ body{
     border-radius: 50%;
 
     transform: translate(50px, 0px);
+    transition: top .3s linear;
 }
 
 .gun-container__div--five{
@@ -102,7 +103,7 @@ body{
     visibility: visible;
 
     transform: translate(50px, 0px);
-    transition: width .2s linear, height .2s linear, left .4s ease-out, visibility .7s linear;
+    transition: width .2s linear, height .2s linear, left .4s ease-out, visibility .7s linear, top .1s linear;
 }
 .monsters-container{
     position: relative;
