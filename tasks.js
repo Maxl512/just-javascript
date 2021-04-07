@@ -294,12 +294,6 @@ let shotOne = document.querySelector("#shotOne");
 let shotTwo = document.querySelector("#shotTwo");
 let shotThree = document.querySelector("#shotThree");
 
-let gunPosition = gun.getBoundingClientRect();
-let monsterPosition = monster.getBoundingClientRect();
-let topGun = gunPosition.top;
-let topMonster = monsterPosition.top;
-let XMonster = monsterPosition.right;
-
 let kills = document.querySelector("#kills");
 let killsCount = kills.textContent;
 killsCount = parseInt(killsCount);
@@ -312,6 +306,18 @@ let lives = document.querySelector("#lives");
 let livesCount = lives.textContent;
 livesCount = parseInt(livesCount);
 
+const monsterAttack = () =>{
+    let monsterPosition = monster.getBoundingClientRect();
+    let topMonster = monsterPosition.top;
+    let XMonster = monsterPosition.right;
+    monster.style.transition = "right 3s linear";
+    monster.style.right = "800px";
+    if (XMonster >= 780) {
+        console.log(XMonster);
+        alert("perdite")
+    };
+};
+monsterAttack();
 const shot = (time) =>{
     let visible = ammo.getAttribute("hidden");
     if(visible === null){
@@ -360,57 +366,48 @@ const reload =() =>{
 
     ammo.removeAttribute("hidden");
 };
-function killMonster(time){
-    if(topGun == topMonster && time == 1){        
+const killMonster = (time) =>{
+    let gunPosition = gun.getBoundingClientRect();
+    let monsterPosition = monster.getBoundingClientRect();
+    let topGun = gunPosition.top;
+    let topMonster = monsterPosition.top;
+    let XMonster = monsterPosition.right;
+    if(topGun == topMonster && time == 1){    
+        monster.style.right = `${1440 - XMonster}px`;
+
         monster.style.backgroundColor = "#660";
         monster.style.top = "55%";
-        monster.style.borderBottom = "10px solid #020";
-        monster.style.borderTop="50px solid #020";
+        monster.style.borderBottom = "10px solid #aaa";
+        monster.style.borderTop="50px solid #000";
         monster.style.borderRadius ="0% 0% 30% 30%";
         monsterMouth.style.borderRadius = "0% 0% 0% 0%";
         monsterMouth.style.backgroundColor = "#400";
-        monsterEyeL.style.backgroundColor="#fff";
-        monsterEyeR.style.backgroundColor="#fff";
-
-        monster.style.right = `${1440 - XMonster}px`;
-        monster.style.animationName = "monsterRetirement";
-        monster.style.animationIterationCount = `${time}`;
-        monster.style.animationDuration = "2s";
-
-        setTimeout(() => {
-            monster.style.animationName = "monsterAttack";
-            monster.style.animationIterationCount = `${time}`;
-            monster.style.animationDuration = "2s";
-        }, 2010);
+        monsterEyeL.style.backgroundColor="#000";
+        monsterEyeR.style.backgroundColor="#000";
    
         shotOne.style.display = "none";
         shotTwo.style.display = "inline-block";
-    } else if(topGun == topMonster && time == 2){
+
+        monsterAttack();
+    } else if(topGun == topMonster && time == 2){        
         monster.style.right = `${1440 - XMonster}px`;
-   
-        monsterMouth.style.borderRadius = "50% 50% 0% 0%";
-        monsterMouth.style.backgroundColor = "#000";
-        monsterEyeL.style.backgroundColor="#300";
-        monsterEyeR.style.backgroundColor="#300"; 
 
-        monster.style.animationName = "monsterRetirement";
-        monster.style.animationIterationCount = `${time - 1}`;
-        monster.style.animationDuration = "2s";
         monster.style.backgroundColor = "#600";
-
-        setTimeout(() => {
-            monster.style.top = "10%";
-            monster.style.animationName = "monsterAttack";
-            monster.style.animationIterationCount = `${time - 1}`;
-            monster.style.animationDuration = "2s";
-        }, 2010);
+        monster.style.borderBottom = "10px solid #333";
+        monster.style.borderTop="50px solid #444";
+        monster.style.borderRadius ="0% 0% 30% 30%";
+        monsterMouth.style.borderRadius = "50% 50% 0% 0%";
+        monsterMouth.style.backgroundColor = "#100";
+        monsterEyeL.style.backgroundColor="#000";
+        monsterEyeR.style.backgroundColor="#000";
+        monster.style.top = "10%";
 
         shotTwo.style.display = "none";
         shotThree.style.display = "inline-block";
 
+        monsterAttack();
     } else if(topGun == topMonster && time == 3){
         monster.style.right = `${1440 - XMonster}px`;
-        monster.style.animation ="none";
 
         monster.style.backgroundColor = "#fff";
         monster.style.borderRadius = "50% 50% 0% 0%";
@@ -445,13 +442,14 @@ function killMonster(time){
             score.innerHTML = scoreCount;
    
             shotThree.style.display = "none";
-            shotOne.style.display = "inline-block"
+            shotOne.style.display = "inline-block";
 
             anotherOne();
         }, 2000);
     };
 }; 
-function anotherOne(){
+const anotherOne =() =>{
+    monster.style.transition ="none";
     monster.style.display = "block";
     monster.style.position = "absolute";
     monster.style.width = "200px";
@@ -463,27 +461,24 @@ function anotherOne(){
     monster.style.right = "10px";
     monster.style.borderRadius = "0% 0% 30% 30%";
 
-    monsterEyeL.style.display = "inline-block";
-    monsterEyeL.style.backgroundColor = "#000";
-    monsterEyeL.style.borderTop = "5px solid #aaa";
-
-    monsterEyeR.style.display = "inline-block";
-    monsterEyeR.style.backgroundColor = "#000";
-    monsterEyeR.style.borderTop = "5px solid #aaa";
-
-    monsterMouth.style.display ="inline-block";  
-    monsterMouth.style.backgroundColor = "#700";
-    monsterMouth.style.borderRadius = "0% 0% 50% 50%";
-
-    monster.style.transition ="top .1s linear";
-
-    monster.style.animationName = "monsterAttack";
-    monster.style.animationIterationCount ="1";
-    monster.style.animationTimingFunction = "linear";
-    monster.style.animationDuration = "2s";
-    monster.style.animationDirection = "normal";
+    setTimeout(() => {
+        monster.style.transition ="top .1s linear, right 3s linear";
+        monster.style.right ="800px";
+   
+        monsterEyeL.style.display = "inline-block";
+        monsterEyeL.style.backgroundColor = "#000";
+        monsterEyeL.style.borderTop = "5px solid #aaa";
+    
+        monsterEyeR.style.display = "inline-block";
+        monsterEyeR.style.backgroundColor = "#000";
+        monsterEyeR.style.borderTop = "5px solid #aaa";
+    
+        monsterMouth.style.display ="inline-block";  
+        monsterMouth.style.backgroundColor = "#700";
+        monsterMouth.style.borderRadius = "0% 0% 50% 50%";
+    }, 100);
 };
-function moveGun(event, position){
+const moveGun = (event, position) =>{
     let dir = event.which || event.keyCode;  
     if(dir === 40){
         position += 25; 
