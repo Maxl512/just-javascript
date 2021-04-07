@@ -319,12 +319,71 @@ const monsterAttack = () =>{
             if (livesCount === 0){
                 livesCount = 0;
                 lives.innerHTML = livesCount;
-                gun.style.top = "1000px";       
+                gun.style.top = "1000px";         
+                setTimeout(() => {
+                    gun.style.display ="none";
+                }, 500);       
                 monster.style.right = "1060px";
                 monster.style.top = "100px";
                 setTimeout(() => {
-                    gun.style.display ="none";
-                }, 500);
+                    let decide = prompt(`Kills: ${killsCount}. Puntuacion: ${scoreCount}. Quieres guardar estos datos? S-Si N-No`);
+                    let scoreTableDiv = document.querySelector(".score-table-container");
+                    
+                    if (decide == "S") {
+                        let name = prompt("Que nombre le pondras a este puntaje?");
+                        name = document.createTextNode(name);
+
+                        let scoreKept = document.createElement("DIV");
+
+                        let scoreName = document.createElement("H2");
+
+                        scoreName.appendChild(name);
+
+                        let scoreTable = document.createElement("TABLE");
+
+                        let thead = document.createElement("THEAD");
+
+                        let thK = document.createElement("TH");
+                        let thS = document.createElement("TH");
+
+                        let thKT = document.createTextNode("Kills");
+                        let thST = document.createTextNode("Score");
+
+                        thK.appendChild(thKT);
+                        thS.appendChild(thST);
+
+                        thead.appendChild(thK);
+                        thead.appendChild(thS);
+
+                        let tr = document.createElement("TR");
+
+                        let tdK = document.createElement("TD");
+                        let tdS = document.createElement("TD");
+
+                        let tdKT = document.createTextNode(killsCount);
+                        let tdST = document.createTextNode(scoreCount);
+
+                        tdK.appendChild(tdKT);
+                        tdS.appendChild(tdST);
+
+                        tr.appendChild(tdK);
+                        tr.appendChild(tdS);
+
+                        scoreTable.appendChild(thead);
+                        scoreTable.appendChild(tr);
+
+                        scoreTable.setAttribute("id", "score-table");
+
+                        scoreKept.appendChild(scoreName);
+                        scoreKept.appendChild(scoreTable);
+
+                        scoreKept.setAttribute("id", "score-kept");
+
+                        scoreTableDiv.appendChild(scoreKept);
+                    } else{
+                        alert("Ok");
+                    };
+                }, 3010);
                 setTimeout(() => {
                     restart();
                 }, 4000);
