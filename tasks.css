@@ -123,13 +123,6 @@ body{
     border-radius: 0% 0% 30% 30%;
 
     transition: top .1s linear, right 3s linear;
-
-    animation-name: monsterAttack;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-duration: 2s;
-    animation-direction: normal;
-    animation-fill-mode: forwards;
 }
 .monsters-container__div-span:nth-child(1){
     position: absolute;

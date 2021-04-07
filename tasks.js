@@ -307,15 +307,33 @@ let livesCount = lives.textContent;
 livesCount = parseInt(livesCount);
 
 const monsterAttack = () =>{
-    let monsterPosition = monster.getBoundingClientRect();
-    let topMonster = monsterPosition.top;
-    let XMonster = monsterPosition.right;
     monster.style.transition = "right 3s linear";
     monster.style.right = "800px";
-    if (XMonster >= 780) {
-        console.log(XMonster);
-        alert("perdite")
-    };
+    setTimeout(() => {   
+        let monsterPosition = monster.getBoundingClientRect();
+        let XMonster = monsterPosition.right;
+        if (XMonster <= 645) {
+            livesCount -= 1;
+            lives.innerHTML = livesCount;
+            if (livesCount === 0){
+                alert("perdiste");
+            } else if (livesCount === 1) {
+                gun.style.backgroundColor = "#444"; 
+                monster.style.transition = "none";
+                monster.style.right = "0px";
+                setTimeout(() => {
+                    monsterAttack();
+                }, 100);
+            } else if(livesCount === 2){    
+                gun.style.backgroundColor = "#aaa";      
+                monster.style.transition = "none";
+                monster.style.right = "0px";
+                setTimeout(() => {
+                    monsterAttack();
+                }, 100);
+            };  
+        };
+    }, 3000);
 };
 monsterAttack();
 const shot = (time) =>{
@@ -325,6 +343,7 @@ const shot = (time) =>{
         ammo.style.height = "100%";
         ammo.style.left ="1100px";
         ammo.style.transition ="width .2s linear, height .2s linear, left .5s ease-out";
+        
         setTimeout(() => {
             ammo.setAttribute("hidden", "");
         }, 510);
