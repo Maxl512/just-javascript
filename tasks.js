@@ -305,6 +305,9 @@ let lives = document.querySelector("#lives");
 let livesCount = lives.textContent;
 livesCount = parseInt(livesCount);
 
+
+let scoresNames = [];
+
 const monsterAttack = () =>{
     monster.style.transition = "none";
     monster.style.right = "10px";
@@ -328,14 +331,19 @@ const monsterAttack = () =>{
                 setTimeout(() => {
                     let decide = prompt(`Kills: ${killsCount}. Puntuacion: ${scoreCount}. Quieres guardar estos datos? S-Si N-No`);
                     let scoreTableDiv = document.querySelector(".score-table-container");
+                    let scoreKeptQuantity = scoreTableDiv.children;
+                    scoreKeptQuantity = scoreKeptQuantity.length;
                     
-                    if (decide == "S") {
+                    if (decide == "S" && scoreKeptQuantity < 5) {
                         let name = prompt("Que nombre le pondras a este puntaje?");
+                        scoresNames.push(name);
                         name = document.createTextNode(name);
 
                         let scoreKept = document.createElement("DIV");
 
                         let scoreName = document.createElement("H2");
+                        scoreName.setAttribute("id", "score-name" + (scoreKeptQuantity + 1));
+                        scoreName.setAttribute("class", "score-name");
 
                         scoreName.appendChild(name);
 
@@ -363,6 +371,9 @@ const monsterAttack = () =>{
                         let tdKT = document.createTextNode(killsCount);
                         let tdST = document.createTextNode(scoreCount);
 
+                        tdK.setAttribute("id", "score-kills" + (scoreKeptQuantity + 1));
+                        tdS.setAttribute("id", "score-quantity" + (scoreKeptQuantity + 1));
+
                         tdK.appendChild(tdKT);
                         tdS.appendChild(tdST);
 
@@ -372,16 +383,40 @@ const monsterAttack = () =>{
                         scoreTable.appendChild(thead);
                         scoreTable.appendChild(tr);
 
-                        scoreTable.setAttribute("id", "score-table");
+                        scoreTable.setAttribute("class", "score-table");
 
                         scoreKept.appendChild(scoreName);
                         scoreKept.appendChild(scoreTable);
 
-                        scoreKept.setAttribute("id", "score-kept");
+                        scoreKept.setAttribute("class", "score-kept");
 
                         scoreTableDiv.appendChild(scoreKept);
+                    } else if(decide == "S" && scoreKeptQuantity == 5){
+                        function rewriting() {
+                            alert("Ya tienes 5 puntajes guardados, debes sobreescribir uno para continuar");
+                            let rewrite = prompt(`A cual quieres eliminar? 1- ${scoresNames[0]} 2- ${scoresNames[1]} 3- ${scoresNames[2]} 4- ${scoresNames[3]} 5- ${scoresNames[4]}`);
+                            rewrite = parseInt(rewrite);
+                            if (rewrite != NaN && rewrite != undefined) {
+                                let newName  = prompt("Que nombre le pondras?");
+                                let lastName = document.querySelector(`#score-name${rewrite}`);
+                                lastName.innerHTML = newName;
+                                let lastKills = document.querySelector(`#score-kills${rewrite}`);
+                                lastKills.innerHTML = killsCount;
+                                let lastScore = document.querySelector(`#score-quantity${rewrite}`);
+                                lastScore.innerHTML = scoreCount;
+                            } else{
+                                alert("Debes decidir entre las opciones q te di");
+                                let decide = prompt("Quieres Intentarlo de nuevo? S-Si N-NO");
+                                if (decide == "S") {
+                                    rewriting();
+                                } else{
+                                    alert("OK");
+                                };
+                            };
+                        }
+                        rewriting();
                     } else{
-                        alert("Ok");
+                        alert("OK");
                     };
                 }, 3010);
                 setTimeout(() => {
@@ -416,7 +451,6 @@ const monsterAttack = () =>{
 const setTop = () =>{
     let randomTop = Math.random();
     randomTop = Math.round(randomTop);
-    console.log(randomTop);
     if (randomTop === 1) {
         monster.style.top = "10%";
         monster.style.right = "0px";
@@ -509,7 +543,6 @@ const killMonster = (time) =>{
     let topGun = gunPosition.top;
     let topMonster = monsterPosition.top;
     let XMonster = monsterPosition.right;
-    console.log(topMonster);
     if(topGun == topMonster && time == 1){    
         monster.style.right = `${1440 - XMonster}px`;
 

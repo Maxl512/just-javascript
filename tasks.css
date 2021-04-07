@@ -205,6 +205,8 @@ body{
 .score-container__p:nth-child(3){
     background-color: #222;
 }
+
+
 .score-table-container{
     display: flex;
     flex-wrap: wrap;
@@ -215,31 +217,31 @@ body{
     padding: 10px;
 
 }
-#score-kept{
+.score-kept{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;  
 
     flex-basis: 19%;
 }
-#score-kept h2{
+.score-name{
     flex-basis: 100%;
     text-align: center;
 }
-#score-table{
+.score-table{
     flex-basis: 100%;
     padding: 10px;
     background-color: #444;
     text-align: center;
     margin: 5px;
 }
-#score-table thead th{
+.score-table thead th{
     padding: 5px;
     background-color: #777;
     
     font-size: 1.5em;
 }
-#score-table tr td{
+.score-table tr td{
     padding: 5px;
     background-color: #bbb;
     
