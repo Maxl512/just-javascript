@@ -8,7 +8,9 @@
     <title>Tasks Javascript</title>
 
 </head>
-<body onkeydown="moveGun(event, 30);">
+
+<body>
+<!-- <body onkeydown="moveGun(event, 30);"> -->
 <!--
     <label for="name">Nombre</label>
     <input required type="text" id="name" ><br><br>
@@ -58,7 +60,7 @@
         <br><br>
         <button onclick="hideList();">Cerrar lista completa</button>
     </div>-->
-    <h1 class="game-title">Mata al OGRO!</h1>
+    <!-- <h1 class="game-title">Mata al OGRO!</h1>
     <div class="game-container">
         <div class="gun-container">
             <div class="gun-container__div--one"></div>
@@ -90,14 +92,28 @@
         <div class="score-table-container">
             
         </div>
-    </div>
-
-
-
-
-
+    </div> -->
     
-
+   <div class="animals">
+        <div class="form-container">
+            <h2 class="form-header">Add Animal</h1>
+            <form class="add-form" onsubmit="addAnimal();">
+                <label class="add-form__label" for="name">Name:</label>
+                <input required minlength="6" maxlength="12" class="add-form__input" id="name" type="text">
+                <label class="add-form__label" for="race">Race:</label>
+                <input required minlength="5" maxlength="15" class="add-form__input" id="race" type="text">
+                <label class="add-form__label" for="age">Age:</label>
+                <input required maxlength="3" max="100" class="add-form__input" type="number" id="age">
+                <input class="add-form__input--submit" type="submit" value="Add">
+            </form>
+        </div>
+        <div class="animal-list">
+            <div class="animal-header">
+                <h2>Animales</h2>
+            </div>
+            <div id="display-animals" class="display-animals"></div>
+        </div>
+   </div>
 
   <script src="tasks.js"></script>  
 </body>
