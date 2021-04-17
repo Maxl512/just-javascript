@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mid-level Javascript</title>
+        <style>
+            body {
+                background-color: #430;
+            }
+
+            h2 {
+                color: #eee;
+                font-size: 1.5em;
+            }
+
+            p {
+                color: #ccc;
+            }
+
+            p:hover {
+                color: #000;
+            }
+
+            button {
+                background-color: #050;
+                border: 3px solid #111;
+                border-radius: 5px;
+                padding: 15px;
+                color: #ccc;
+            }
+
+            button:hover {
+                background-color: #030;
+            }
+
+            input {
+                display: block;
+                background-color: #005;
+                color: #fff;
+                padding: 15px;
+                margin: 10px;
+                border: none;
+                border-bottom: 3px solid #500;
+                outline: none;
+            }
+
+            a {
+                text-decoration: none;
+                background-color: #557;
+                color: #000;
+                padding: 20px;
+                border-bottom: 8px solid #224;
+            }
+
+            a:hover {
+                background-color: #335;
+                border-bottom: 8px solid #112;
+                color: #aaa;
+            }
+
+            .grid-item {
+                display: grid;
+                grid-template-rows: 50px;
+                grid-template-columns: repeat(4, minmax(25%, 25%));
+                grid-auto-rows: 50px;
+            }
+
+            .grid-item div {
+                padding: 10px;
+                border: 1px solid #000;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Titulo</h2>
+            <p class="parrafo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, cumque tempora placeat optio, in necessitatibus quis sint perspiciatis molestiae ab modi quia est nemo quos. Quaerat omnis sit minima ut! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae autem accusantium quam quisquam doloremque aliquam incidunt explicabo laborum. Debitis, commodi atque deleniti eos eius laudantium ad blanditiis iste facilis nemo? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit eaque laborum nemo enim explicabo est laudantium sequi doloribus, nam quia, autem temporibus itaque soluta velit provident aut necessitatibus facilis? Fugit.</p>
+        </div>
+        <br>
+        <br>
+        <button onclick="alert('Hola');">Di hola</button>
+        <br>
+        <br>
+        <button onclick="sayHello();">Di hola pero con funcion</button>
+        <br>
+        <br>
+        <button id="buttonThree">Di hola pero con Selector</button>
+        <br>
+        <br>
+        <button id="buttonFour">Di hola pero con eventListener</button>
+        <br>
+        <br>
+        <button id="buttonFive">Di hola pero con eventListener flecha</button>
+        <br>
+        <br>
+        <button id="buttonSix">Di hola pero con eventListener remover</button>
+        <br>
+        <br>
+        <button id="buttonSeven">Propiedades del evento click</button>
+        <br>
+        <br>
+        <div id="buttonEight-container">
+            <button id="buttonEight">flujo de evento Bubling</button>
+        </div>
+        <br>
+        <br>
+        <div id="buttonNine-container">
+            <button id="buttonNine">flujo de evento Capturing</button>
+        </div>
+        <br>
+        <br>
+        <div id="buttonTen-container-father">
+            <div id="buttonTen-container">
+                <button id="buttonTen">Detener el flujo de evento</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <button id="buttonEleven">Evento doble click</button>
+        <br>
+        <br>
+        <button id="buttonTwelve">Evento pasar mouse por encima</button>
+        <br>
+        <br>
+        <button id="buttonThirteen">Evento mouse fuera de un elemento</button>
+        <br>
+        <br>
+        <button id="buttonFourteen">Evento abrir el context menu</button>
+        <br>
+        <br>
+        <button id="buttonFifteen">Evento soltar algo encima</button>
+        <br>
+        <br>
+        <input placeholder="input one" id="inputOne" type="text">
+        <input placeholder="input two" id="inputTwo" type="text">
+        <input placeholder="input three" id="inputThree" type="text">
+        <img id="imgOne" src="sdasdasdasda.jpg">
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="https://www.youtube.com">Youtube</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="inputFour-container">
+            <input placeholder="input four" id="inputFour" type="text">
+            <p id="inputFour-container__p"></p>
+        </div>
+        <br>
+        <br>
+        <h2>Inscripcion de materias adeudadas</h2>
+        <form>
+            <input required id="userName" placeholder="Escribe tu nombre" type="text">
+            <input required id="userEmail" placeholder="Escribe tu mail" type="mail">
+            <input required id="userMatter" placeholder="Materia Adeudada" type="text">
+            <input required id="btn-submit" value="Solicitar Mesa" type="submit">
+        </form>
+        <div id="result"></div>
+        <br>
+        <br>
+        <div class="grid-container"></div>
+        <button class="btn-confirm">Confirmar</button>
+        <br>
+        <br>
+        <form class="notes-form">
+            <h2>Introduce la nota del ALumno</h2>
+            <input max="10" placeholder="Nota del alumno" type="number" id="pupil-note">
+            <button id="note-submit">Enviar nota</button>
+        </form>
+        <p id="results-pupil"></p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <script src="javascript-mid-level.js"></script>
+    </body>
+</html>
