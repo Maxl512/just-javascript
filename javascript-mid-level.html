@@ -6,6 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mid-level Javascript</title>
         <style>
+            *{
+                padding:0;
+                margin:0;
+                box-sizing:border-box;
+            }
             body {
                 background-color: #430;
             }
@@ -71,6 +76,35 @@
                 padding: 10px;
                 border: 1px solid #000;
                 margin: 5px;
+            }
+            #materies{
+                width:100%;
+                background-color:#003;
+                height:100%;
+                padding:3%;
+            }
+            #matery{
+                display:flex;
+                flex-wrap:wrap;
+                flex-direction:row;
+
+                width:100%;
+                height:100%;
+                margin:2%;
+                align-items:center;
+            }
+            #matery-name{
+                flex-grow:1;
+                padding:3%;
+
+                background-color:#bbb;
+            }
+            #matery-note{
+                flex-basis:10%;
+
+                padding:3%;
+                background-color:#999;
+                font-weight:900;
             }
         </style>
     </head>
@@ -177,6 +211,9 @@
         <p id="results-pupil"></p>
         <br>
         <br>
+
+        <div id="materies"></div>
+
         <br>
         <br>
         <br>

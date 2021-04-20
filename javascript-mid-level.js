@@ -903,8 +903,275 @@ const showResults = () =>{
 // TERMINA CAPITULO 10
 
 // EMPIEZA CAPITULO 11
-// Trabajo obsoletos
+/*
+TRABAJR DE MANERA OBSOLETA
+ALGO OBSOLETO ES ALGO INUTIL PARA LAS CIRCUNSTANCIAS ACTUALES
+
+¿CUANDO ALGO SE VUELVE OBSOLETO?
+DEPRECATED --- OBSOLETO.
+ES ALGO INUTIL YA Q NO SIRVE Y NO ESTA DISPONIBLE.
+NO ES RECOMENDADO.
+TIENE UN BUG O FALLO.
+ESTA POR SER REEMPLAZADO.
+HAY MEJORES FORMAS DE HACERLO.
+
+EFECTOS NEGATIVOS DE TRABAJAR OBSOLETO
+
+-USO EXCESIVO DE RECURSOS.
+-CODIGO CON BUGS O FALLOS.
+-INNECESARIAMENTE LARGO.
+-SEO.
+
+COMO VERIFICAR SI ESTA OBSOLETO?
+
+1 DE CADA WEBS USAN LIBRERIAS JAVASCRIPT OBSOLETAS.
+SI TIENEN FUNCIONES METODOS OBSOLETOS.
+VERIFICAR EN LOS SITIOS WEBS DE ESTADANRES OFICIALES
+
+*/
+// TERMINA CAPITULO 11
+
+// EMPIEZA CAPITULO 12
+/*
+CALLBACKS (FUNCTION IN FUNCTION)
+ES UNA FUNCION DENTRO DE UNA FUNCION
+es un parametro q le pasamos a una funcion
+
+function prueba(callback){
+    callback("pedro");
+};
+
+function decirNombre(nombre){
+    console.log(nombre);
+};
+
+prueba(decirNombre);
 
 
 
+class Person {
+    constructor(name, facebook){
+        this.name = name;
+        this.facebook = facebook;
+    };
+};
 
+const data = [
+    ["Maximo"],
+    ["lucas", "Lucas Dalto.face"],
+    ["Pedro", "Pedro Rodriguez.face"],
+    ["Juan", "Juan Pablo.face"]
+];
+
+const people = [];
+
+for (someone in data){
+  people[someone] = new Person(data[someone][0], data[someone][1]);
+};
+
+
+const getName = (id, cb) =>{
+  if(people[id].name == undefined)  {
+      cb("No se ha encontrado la persona");
+  }else{
+      cb(null, people[id].name);
+  };
+};
+const getFace = (id, cb) =>{
+  if(people[id].instagram == undefined)  {
+      cb("No se ha encontrado el Facebook");
+  }else{
+      cb(null, people[id].facebook);
+  };
+};
+
+getName(0, (err, person) =>{
+   if (err){
+       console.log(err);
+   } else{
+       console.log(person);
+   };
+});
+getFace(0, (err, facebook) =>{
+   if(err) {
+       console.log(err);
+   }else{
+       console.log(facebook)
+   }
+});
+
+
+// los callbacks tienen desventajsa
+la cual se soluciono con lo q llamamos promesas
+*/
+
+
+
+// Promesas
+// estan tienen dos parametros el reject y el resolve
+// reject()  si la condicion no se cumple lo devuelve
+// resolve() si se cumple lo devuelve en la promesa
+let pName = "pedro";
+
+const promise = new Promise((resolve,reject)=>{
+    if(pName !== "pedro") reject ("Lo siento el nombre no es pedro")
+    else resolve(pName)
+});
+// Aqui estamos creando un obejto y pasandole un parametro como una funcion
+promise.then((result)=>{
+   console.log(result) ;
+}).catch((e)=>{
+    console.log(e);
+})
+
+//then es un metodo que tiene las promesas que acceden al valor
+//que tiene el result, le pasamos como parametro el valor del resolve
+
+
+class Person {
+    constructor(name, facebook){
+        this.name = name;
+        this.facebook = facebook;
+    };
+};
+
+const data = [
+    ["Maximo"],
+    ["lucas", "Lucas Dalto.face"],
+    [, "Pedro Rodriguez.face"],
+    ["Juan", "Juan Pablo.face"]
+];
+
+const people = [];
+
+for (someone in data){
+  people[someone] = new Person(data[someone][0], data[someone][1]);
+};
+
+const getSomeone = (id) =>{
+    return new Promise((resolve, reject)=>{
+        if(people[id].name == undefined) {reject("No se ha encontrado la persona")}
+        else {resolve(people[id].name)};
+    });
+};
+
+const getFace = (id) =>{
+    return new Promise((resolve,reject)=>{
+       if(people[id].facebook == undefined) {reject("No se ha encontrado el Facebook")}
+       else {resolve(people[id].facebook)};
+    });
+};
+
+let id = 3;
+
+getSomeone(id).then((result)=>{
+    
+   console.log(result);
+
+   return getFace(id);
+    
+}).then((facebook)=>{
+    
+   console.log(facebook);
+    
+}).catch((e)=>{
+    
+    console.log(e);
+    
+});
+
+
+//FUNCIONES ASINCRONAS
+/*
+LAS PROMESAS SON ASINCRONAS ES DECIR TRABAJAN EN TIEMPO REAL
+*/
+
+const getInformation = (text) =>{
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve(text)}, Math.random()*100);
+    });
+};
+
+
+// LAs promesas esperan a recibir la informacion para poder ejecutarla
+
+// Para crear una funcion asincrona solo se le debve agregar async adelante
+/*
+async function (){
+    ....
+}
+const name = async () =>{
+    ...
+}
+
+*/
+const showInformation = async () =>{
+     let data1 = await getInformation("Hello");
+     let data2 = await getInformation("Hello two");
+     let data3 = await getInformation("Hello three");
+     console.log(data1);
+     console.log(data2);
+     console.log(data3);
+};
+showInformation();
+// Asi hacemos que trabaje como async
+// Cuando agregamos async podemos agregar await, que especifica q no haga mas nada hasta
+// que obtenga la informacion necesaria
+
+// HISTORIA DE KOFLA
+/*
+ESTA EN EL ULTIMO AÑO Y DEBE RECUPERAR TODAS LAS NOTAS
+PARA SABER SI PASO AL OTRO SEMESTRE, SI LO HIZO ESTARIA MUY CERCA DE TERMINAR
+SU CARRERA COMO INGENIERO.
+EL PROBLEMA ES QUE TODAS ESTAN NOTAS ESTAN EN OTRO SERVIDOR
+1)CREAR UN SISTEMA QUE ALMACENE TODA LA INFORMACION DE LAS MATERIAS
+Y LAS MUESTRE EN PANTALLA DE FORMA ORDENADA
+*/
+
+const materiesContainer = document.querySelector("#materies");
+
+const materies = [
+    {
+        name:"Fisica 1",
+        note:5
+    },{
+        name:"Mathematic 3",
+        note:7
+    },{
+        name:"Data Bases 5",
+        note:8
+    },{
+        name:"Physic 6",
+        note:3
+    },{
+        name:"Programming 8",
+        note:10
+    }
+];
+
+const getMatery = (id) =>{
+    return new Promise((resolve,reject)=>{
+        matery = materies[id];
+        if(matery ==undefined) reject("That matery doesn't exist")
+        else setTimeout(()=>{resolve(matery)}, Math.random()*1500);
+    });
+};
+const showMateries = async () =>{
+    let matery = [];
+    for(theMatery in materies){
+         matery[theMatery] = await getMatery(theMatery);
+         console.log(matery[theMatery]);
+         let htmlCode =
+         `
+         <div id="matery">
+              <div id="matery-name">${matery[theMatery].name}</div>
+              <div id="matery-note">${matery[theMatery].note}</div>
+         </div> 
+         `;
+         materiesContainer.innerHTML += htmlCode;
+    };
+};
+showMateries();
+
+// TERMINA CAPITULO 12
+// CAPITULO 13
