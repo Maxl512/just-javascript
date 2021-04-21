@@ -1160,7 +1160,6 @@ const showMateries = async () =>{
     let matery = [];
     for(theMatery in materies){
          matery[theMatery] = await getMatery(theMatery);
-         console.log(matery[theMatery]);
          let htmlCode =
          `
          <div id="matery">
@@ -1175,3 +1174,270 @@ showMateries();
 
 // TERMINA CAPITULO 12
 // CAPITULO 13
+/*
+PETICIONES HTTP
+ES UNA PETICION QUE ENVIAMOS A UN SERVIDOR EL CUAL NOS DEVUELVE UNA INFORMACION
+LA CUAL OBTENEMOS
+ES UNA PEDIDA DE UN CLIENTE AL SERVIDOR
+
+EL CLIENTE ES EL NAVEGADOR, LA INTERFAZ FRONTEND, LO QUE MANEJA EL USUARIO
+
+EL SERVIDOR ES EL QUE PROCESAR TODA ESA INFORMACION
+
+*/
+/*
+JSON(JAVASCRIPT OBJECT NOTATION)
+JSON ES EXACTAMENTE IGUAL A LOS OBEJTOS
+solo que las propiedades llevan comillas
+*/
+
+let objectThree = {
+    "name":"Jesus",
+    "lastname":"Rodriguez"
+};
+
+console.log(objectThree);
+
+/*
+las propiedades json llevan comillas ya que si als enviamos sin comillas a un servidor
+puede generar muchos problemas
+
+SERIALIZACION
+SIGNIFICA QUE EL JSON ES UNA CADENA DE TEXTO
+*/
+
+let objectFour = {
+    "name": "Jesus", 
+    "lastname": "Rodriguez"
+};
+/*
+PARA ENVIAR UN JSON SE NECESITA SERIALIZARLO
+PARA SERIALIZARLO SE USA EL METODO JSON.stringify(object);
+*/
+let objectString = JSON.stringify(objectFour);
+console.log(objectString);
+// Aqui el objeto ha sido serializado
+
+/*
+AHORA PARA DESERIALIZARLO Y USARLO COMO OBJETO UTILIZAMOS EL METODO
+JSON.parse(object);
+*/
+let objectNormal = JSON.parse(objectString);
+console.log(objectNormal);
+
+// JSON POLYFILL
+/*
+ES UNA FUNCINO QUE SIMULA UN JSON PARA NAVEGADORES ANTIGUOS
+*/
+
+// AJAX
+/*ASYNCHRONYMOUS JAVASCRIPT XL
+PARA TRABAJAR CON AJAX DBEMOS TENER UN SERVIDOR
+
+
+CUANDO SOLICITAMOS INFORMACION A UN SERVIDOR ESTA SE ACTUALIZAR
+DEBIDO A QUE ES UNA OPERACION SINCRONA
+
+AJAX CAMBIO ESO, YA QUE NOS DA RESPUESTAS DE FORMA PARALELA
+
+// OBJETO XMLHttpRequest
+envia una solicitud
+*/
+const request = new XMLHttpRequest();
+
+request.open("GET", "json.txt");
+// Es un metodo que envia una peticion, tiene dos parametros
+// el modo de solicitud "GET" o "POST"
+/*
+GET:  sus peticiones s epueden ver en la url
+POST: son mas seguras que GEt ya que no las muestra en la URL
+*/
+// y la url de donde pediremos informacion
+request.send();
+// Aqui envia la informacion obtenida, con el metodo request.open();
+
+request.addEventListener("readystatechange",()=>{
+    if(request.readyState == 4 && request.status == 200){
+        console.log(request.response);
+    };
+});
+/*
+la propiedad readyState de una peticion
+tiene 4 valores
+1: LA SOLICITUD SE CREO CORRECTAMENTE
+2: LA SOLICITUD SE ENVIO Y RECIBIO CORRECTAMENTE
+3: SE ESTA PROCESANDO LA PETICION
+4: YA NOS DIO UNA RESPUESTA Y EL RESULTADO SE PUEDE MOSTRAR
+
+la propiedad status nos desmuetra si la peticion se hizo correctamente
+200: correctamente Y 201
+*/
+console.log(request);
+
+// DE ESTA FORMA SE TRABAJABA ANTES 
+
+// AHORA SE HACE ASI
+
+let requestTwo;
+if(window.XMLHttpRequest){
+    requestTwo = new XMLHttpRequest();
+} else{
+    requestTwo = new ActiveXObject("Microsoft.XMLHTTP");
+};
+
+requestTwo.open("GET", "json.txt");
+requestTwo.send();
+
+requestTwo.addEventListener("load", ()=>{
+   let responseXML;
+   if(requestTwo.status == 200){ 
+      responseXML = requestTwo.response;
+      responseXML = JSON.parse(responseXML);
+      for(one in responseXML){
+          console.log(`Nombre: ${responseXML[one].name} ---- Apellido: ${responseXML[one].lastname}`);
+      };
+   } else {
+      responseXML = "Lo sentimos no se encuentra el archivo disponible";
+   };
+   console.log(responseXML);
+});
+// OBJETO ActiveXObject
+// Sirve para navegadores obsoletos como internet explorer
+
+
+// METODO POST MAS SEGURO
+let requestThree;
+if(window.XMLHttpRequest){
+    requestThree = new XMLHttpRequest();
+} else{
+    requestThree = new ActiveXObject("Microsoft.XMLHTTP");
+};
+
+
+requestThree.addEventListener("load", ()=>{
+   let responseXML;
+   if(requestThree.status == 200 || requestThree.status == 201){ 
+      responseXML = requestThree.response;
+   } else {
+      responseXML = "Lo sentimos no se encuentra el archivo disponible";
+   };
+   console.log(JSON.parse(responseXML));
+});
+
+
+requestThree.open("POST", "json.txt");
+
+requestThree.setRequestHeader("Content-type", "application/json;charset=UTF8");
+
+requestThree.send();
+
+// FETCH
+// REEMPLAZO COMPLETAMENTE A AJAX Y ACTUALMENTE SE UTILIZA MUCHO MAS
+/*
+ES UNA FOMRA QUE TENEMOS DE TRABAJAR CON EL SERVIDOR IGUAL QUE CON 
+XMLHttpRequest
+
+FETCH ESTA BASADO EN PROMESAS
+*/
+
+let requestFour = fetch("json.txt", {
+    method: "POST",
+    body: `{
+        "five": {
+            "name":"Maximo",
+            "lastname":"Gomez"
+        }`,
+    headers: {"Content-type" : "application/json"}
+}).then(res=>res.json()).then(res=>console.log(res)).catch((err)=>{console.log("Hay un error");});
+// fetch tiene dos parametros, el primero es la direccion del json
+// y el segundo es el metodo de solicitud, el body que sera el contenido
+// que le queremos pasar, y el segundo es el headers
+
+// Esto de una vez crea el elmento XMl que antes aprendimos
+// Las respuestas son asincronas
+
+// con then manejamos los parametros como valores retornados lo cual
+// aprendimos anteriormente
+
+// Esta encapsuladas y no podemos acceder
+// Para hacerlo debemos utilizar la propiedad text en el parametro de
+// respuesta para acceder al string y asignarselo como valor al res
+// Luego si queremos utilizarlo debemos deserializarlo usando el
+// metodo JSON.parse y listo
+
+// Ahora tambien podemos utilizar json() para de una vez deserializarlo
+
+// blob() se utiliza para trabajar y leer archivos
+let imagen = document.querySelector("#imgFet");
+
+fetch("javas/aritmeticos.png")
+.then(res=> res.blob())
+.then(img=> imagen.src = URL.createObjectURL(img))
+.catch((err)=>{
+    console.log("Hubo un error");
+});
+
+// blol nos da los datos y propiedades del archivo,
+// URL.createObjectURL(document), nos crea una url aleatoria que
+// nos permite trabajar con el archivo
+
+
+// AXIOS
+// ES UN REEMPLAZO MAS MODERNO DE FETCH, ESTA BASADA EN XMLHttpRequest
+// esta tna actualizada que no pesa casi nada
+
+// Al trabjar con servidores actualmente se usa fetch y axios
+// Usa una libreria para funcionar https://github.com/axios/
+
+// Una libreria es un conjunto de funciones que nos permite 
+// hacer todo mas practico y sencillo
+
+// Un framework es un conjunto de librerias
+
+axios.post("json.txt",{
+    "five":{
+        "name":"Maximo",
+        "lastname":"Gomez"
+    }
+}).then(res=>console.log(res));
+
+// axios no trae datos encapsulados por lo cual podemos trabajarlos de una vez
+// para enviar datos lo colocamos en el segundo parametro
+
+
+// Fecth y axios con await y async
+
+async function getNameFetch (){
+    try{
+        let request = await fetch("json.txt");
+        let result = await request.json();
+        for(one in result){
+            console.group(result[one].name + " " + result[one].lastname);
+            console.log("Name: " + result[one].name);
+            console.log("Lastname: " + result[one].lastname);
+            console.log("Age: " + result[one].age);
+            console.log("Note: " + result[one].note);
+            console.groupEnd();
+        };
+    } catch(err){
+        console.log("LA API FALLO");
+    };
+};
+getNameFetch();
+
+
+// HISTORIA DE KOFLA
+/*
+KOFLA YA ESTA CURASNDO EL ULTIMO SEMESTRE DE LA UNIVERSIDAD
+TUVO LO NECESARIO PARA LOGRARLO, TIENE UNA DUDA
+QUIERES SABER CUANTAS PERSONAS APRUEBAN AL SEMESTRE Y CUANTAS NO
+1)UN SISTEMA Q LE EPRMITA OBETENER ESA INFORMACION
+2)MOSTRARLA ORDENADAMENTE EN UN SITIO WEB 
+
+
+getNameFetch();
+
+
+*/
+// TERMINA CAPITULO 13
+// TERMINA EL MID LEVEL
